@@ -26,6 +26,10 @@ public class BookController {
     public ResponseEntity<Object> saveBook(@RequestBody @Valid BookDto bookDto){
         if (bookService.existsByAuthorAndBookName(bookDto.getAuthor(), bookDto.getBookName())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Book already exists!");
+        } else if (bookDto.getReleaseYear() > 2023 || bookDto.getReleaseYear() <= 0) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Incorrect release year!");
+        } else if (bookDto.getPageQty() <= 0) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Your book must have pages!");
         }
         var bookModel = new BookModel();
         BeanUtils.copyProperties(bookDto, bookModel);
