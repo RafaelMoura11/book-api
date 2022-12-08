@@ -1,5 +1,6 @@
 package com.api.bookapi.dtos;
 
+
 import jakarta.validation.constraints.*;
 
 public class BookDto {
@@ -12,9 +13,9 @@ public class BookDto {
     @NotBlank
     @Size(max = 20)
     private String category;
-    @NotBlank
+    @NotNull
     private int pageQty;
-    @NotBlank
+    @NotNull
     private int releaseYear;
 
     public String getAuthor() {
