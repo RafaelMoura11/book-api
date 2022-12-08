@@ -9,9 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.List;
+
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -40,5 +39,14 @@ public class BookController {
     @GetMapping
     public ResponseEntity<List<BookModel>> getAllBooks(){
         return ResponseEntity.status(HttpStatus.OK).body(bookService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOneBook(@PathVariable(value = "id") UUID id){
+        Optional<BookModel> bookModelOptional = bookService.findById(id);
+        if (!bookModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book not found!");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(bookModelOptional.get());
     }
 }
