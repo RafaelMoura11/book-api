@@ -4,6 +4,9 @@ import com.api.bookapi.models.BookModel;
 import com.api.bookapi.repositories.BookRepository;
 import jakarta.transaction.*;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class BookService {
     final BookRepository bookRepository;
@@ -21,4 +24,7 @@ public class BookService {
         return this.bookRepository.existsByAuthorAndBookName(author, bookName);
     }
 
+    public List<BookModel> findAll() {
+        return this.bookRepository.findAll();
+    }
 }

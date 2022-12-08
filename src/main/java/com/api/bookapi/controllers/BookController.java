@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -34,5 +35,10 @@ public class BookController {
         var bookModel = new BookModel();
         BeanUtils.copyProperties(bookDto, bookModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(bookService.save(bookModel));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<BookModel>> getAllBooks(){
+        return ResponseEntity.status(HttpStatus.OK).body(bookService.findAll());
     }
 }
