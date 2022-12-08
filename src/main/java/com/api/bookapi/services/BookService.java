@@ -14,7 +14,11 @@ public class BookService {
 
     @Transactional
     public BookModel save(BookModel bookModel) {
-        return bookRepository.save(bookModel);
+        return this.bookRepository.save(bookModel);
+    }
+
+    public boolean existsByAuthorAndBookName(String author, String bookName) {
+        return this.bookRepository.existsByAuthorAndBookName(author, bookName);
     }
 
 }

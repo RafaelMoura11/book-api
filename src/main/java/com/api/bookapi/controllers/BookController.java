@@ -23,7 +23,10 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid BookDto bookDto){
+    public ResponseEntity<Object> saveBook(@RequestBody @Valid BookDto bookDto){
+        if (bookService.existsByAuthorAndBookName(bookDto.getAuthor(), bookDto.getBookName())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Book already exists!");
+        }
         var bookModel = new BookModel();
         BeanUtils.copyProperties(bookDto, bookModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(bookService.save(bookModel));
