@@ -33,4 +33,8 @@ public class BookService {
     public Optional<BookModel> findById(UUID id) {
         return this.bookRepository.findById(id);
     }
+
+    public void delete(BookModel bookModel) {
+        this.bookRepository.delete(bookModel);
+    }
 }

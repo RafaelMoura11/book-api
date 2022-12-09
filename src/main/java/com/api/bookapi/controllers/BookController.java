@@ -49,4 +49,14 @@ public class BookController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(bookModelOptional.get());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteBook(@PathVariable(value = "id") UUID id){
+        Optional<BookModel> bookModelOptional = bookService.findById(id);
+        if (!bookModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book not found!");
+        }
+        bookService.delete(bookModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Book deleted successfully.");
+    }
 }
