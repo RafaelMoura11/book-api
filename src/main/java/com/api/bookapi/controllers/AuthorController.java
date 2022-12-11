@@ -2,6 +2,7 @@ package com.api.bookapi.controllers;
 
 import com.api.bookapi.dtos.AuthorDto;
 import com.api.bookapi.models.AuthorModel;
+import com.api.bookapi.models.BookModel;
 import com.api.bookapi.services.AuthorService;
 import jakarta.validation.*;
 import org.springframework.beans.BeanUtils;
@@ -27,5 +28,10 @@ public class AuthorController {
         var authorModel = new AuthorModel();
         BeanUtils.copyProperties(authorDto, authorModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(authorService.save(authorModel));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AuthorModel>> getAllAuthor(){
+        return ResponseEntity.status(HttpStatus.OK).body(authorService.findAll());
     }
 }
