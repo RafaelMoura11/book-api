@@ -3,7 +3,9 @@ package com.api.bookapi.services;
 import com.api.bookapi.models.AuthorModel;
 import com.api.bookapi.repositories.AuthorRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthorService {
     final AuthorRepository authorRepository;
 
