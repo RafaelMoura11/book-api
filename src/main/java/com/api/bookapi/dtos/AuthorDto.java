@@ -10,7 +10,7 @@ public class AuthorDto {
     private int age;
     @NotBlank
     @Size(max = 20)
-    private String category;
+    private String nationality;
 
     public String getName() {
         return name;
@@ -28,11 +28,11 @@ public class AuthorDto {
         this.age = age;
     }
 
-    public String getCategory() {
-        return category;
+    public String getNationality() {
+        return nationality;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void getNationality(String nationality) {
+        this.nationality = nationality;
     }
 }
