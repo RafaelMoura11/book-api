@@ -5,19 +5,19 @@ import jakarta.validation.constraints.*;
 public class AuthorDto {
     @NotBlank
     @Size(max = 50)
-    private String author;
+    private String name;
     @NotNull
     private int age;
     @NotBlank
     @Size(max = 20)
     private String category;
 
-    public String getAuthor() {
-        return author;
+    public String getName() {
+        return name;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAge() {
