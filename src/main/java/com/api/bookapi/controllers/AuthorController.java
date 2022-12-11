@@ -1,7 +1,8 @@
 package com.api.bookapi.controllers;
 
+import com.api.bookapi.dtos.AuthorDto;
+import com.api.bookapi.models.AuthorModel;
 import com.api.bookapi.services.AuthorService;
-import com.api.bookapi.services.BookService;
 import jakarta.validation.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
@@ -19,5 +20,12 @@ public class AuthorController {
 
     public AuthorController(AuthorService authorService) {
         this.authorService = authorService;
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> saveAuthor(@RequestBody @Valid AuthorDto authorDto){
+        var authorModel = new AuthorModel();
+        BeanUtils.copyProperties(authorDto, authorModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(authorService.save(authorModel));
     }
 }
