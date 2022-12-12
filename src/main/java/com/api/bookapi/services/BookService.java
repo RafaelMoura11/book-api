@@ -34,6 +34,10 @@ public class BookService {
         return this.bookRepository.findById(id);
     }
 
+    public Optional<List<BookModel>> findByAuthor(String author) {
+        return this.bookRepository.findByAuthor(author);
+    }
+
     public void delete(BookModel bookModel) {
         this.bookRepository.delete(bookModel);
     }

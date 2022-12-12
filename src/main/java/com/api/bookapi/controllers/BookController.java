@@ -37,7 +37,14 @@ public class BookController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BookModel>> getAllBooks(){
+    public @ResponseBody ResponseEntity<Object> getBooks(@RequestParam("author") Optional<String> author){
+        if (author.isPresent()) {
+            Optional<List<BookModel>> booksByAuthor = this.bookService.findByAuthor(author.get());
+            if (!booksByAuthor.isPresent()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Author not found!");
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(booksByAuthor.get());
+        }
         return ResponseEntity.status(HttpStatus.OK).body(bookService.findAll());
     }
 
@@ -49,6 +56,7 @@ public class BookController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(bookModelOptional.get());
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteBook(@PathVariable(value = "id") UUID id){
